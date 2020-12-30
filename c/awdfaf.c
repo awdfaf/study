@@ -4,24 +4,39 @@
 #include<string.h>
 #include<math.h>
 
-int fibo(int n);
+
 
 int main()
 {
-    int n;
-    scanf("%d",&n);
+    int N,M,sum=0,max=-1;
 
-    printf("%d",fibo(n));
+    scanf("%d %d",&N,&M);
+
+    int a[N];
+
+    for(int i=0;i<N;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    for(int i=0;i<N-2;i++)
+        for(int j=i+1;j<N-1;j++)
+            for(int k=j+1;k<N;k++)
+                {
+                    sum=a[i]+a[j]+a[k];
+                    if(sum==M)
+                    {
+                        printf("%d",sum);
+                        return 0;
+                    }
+                    else if(sum<M)
+                    {
+                        if(sum>max)
+                            max=sum;
+                    }
+                }
+    printf("%d",max);
+
 
     return 0;
 }
 
-int fibo(int n)
-{
-    if(n==0)
-        return 0;
-    else if(n==1)
-        return 1;
-    else 
-        return (fibo(n-2)+fibo(n-1));
-}
