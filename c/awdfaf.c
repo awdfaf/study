@@ -3,43 +3,63 @@
 #include<stdlib.h>
 #include<string.h>
 #include<math.h>
-
+#define max(a,b) ((a)>(b)?(a):(b))
 
 
 int main()
 {
-    int dsum=0,a=0,len=0;
-    int sum=0,check=0,ori=0,i=0;
+    char A[10002],B[10002];
+    int Result[10003]={0};
+    int temp,i,Aindex,Bindex,flag;
 
-    scanf("%d",&dsum);
-    a=dsum;
-    while(1)
+    scanf("%s %s",A,B);
+    Aindex=strlen(A)-1;
+    Bindex=strlen(B)-1;
+
+    if(Aindex>Bindex)
+        flag=1;
+    else if(Aindex<Bindex)
+        flag=2;
+    else
+        flag=-1;
+
+    if(flag==1)
     {
-        a/=10;
-        len++;
-        if(a==0)
-            break;
+        for(i=Bindex;i>=0;i--)
+            B[Aindex-Bindex+i]=B[i];
+        for(i=0;i<Aindex-Bindex;i++)
+            B[i]='0';
     }
-    for(ori=dsum-9*len;ori<=dsum;ori++)
+    if(flag==2)
     {
-        i=ori;
-        sum=ori;
-        while(1)
-        {
-            sum+=i%10;
-            i/=10;
-            if(i==0)
-                break;
-        }
-        if(sum==dsum)
-        {
-            check=1;
-            printf("%d",ori);
-            break;
-        }
+        for(i=Aindex;i>=0;i--)
+            A[Bindex-Aindex+i]=A[i];
+        for(i=0;i<Bindex-Aindex;i++)
+            A[i]='0';
     }
-    if(check==0)
-        printf("0");
+    for(i=max(strlen(A),strlen(B))-1;i>=0;i--)
+    {
+        temp=(A[i]-'0')+(B[i]-'0');
+        if(Result[i+1]+temp>=10)
+        {
+            Result[i+1]=(Result[i+1]+temp)%10;
+            Result[i]++;
+        }
+        else
+            Result[i+1]+=temp;
+    }
+        
+
+    if(Result[0]==0)
+        for(i=1;i<=max(strlen(A),strlen(B));i++)
+            printf("%d",Result[i]);
+    else
+        for(i=0;i<=max(strlen(A),strlen(B));i++)
+            printf("%d",Result[i]);
+    
+    
+
+
 
     return 0;
 }
