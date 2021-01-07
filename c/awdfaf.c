@@ -5,62 +5,22 @@
 #include<math.h>
 #define max(a,b) ((a)>(b)?(a):(b))
 
-
 int main()
 {
-    char A[10002],B[10002];
-    int Result[10003]={0};
-    int temp,i,Aindex,Bindex,flag;
+    int n;
+    scanf("%d\n", &n);
 
-    scanf("%s %s",A,B);
-    Aindex=strlen(A)-1;
-    Bindex=strlen(B)-1;
-
-    if(Aindex>Bindex)
-        flag=1;
-    else if(Aindex<Bindex)
-        flag=2;
-    else
-        flag=-1;
-
-    if(flag==1)
+    for (int i = 2; i <= sqrt(n); i++)
     {
-        for(i=Bindex;i>=0;i--)
-            B[Aindex-Bindex+i]=B[i];
-        for(i=0;i<Aindex-Bindex;i++)
-            B[i]='0';
-    }
-    if(flag==2)
-    {
-        for(i=Aindex;i>=0;i--)
-            A[Bindex-Aindex+i]=A[i];
-        for(i=0;i<Bindex-Aindex;i++)
-            A[i]='0';
-    }
-    for(i=max(strlen(A),strlen(B))-1;i>=0;i--)
-    {
-        temp=(A[i]-'0')+(B[i]-'0');
-        if(Result[i+1]+temp>=10)
-        {
-            Result[i+1]=(Result[i+1]+temp)%10;
-            Result[i]++;
+        while (n % i == 0)
+        { //나누어떨어지는 동안 계속 출력
+            printf("%d\n", i);
+            n /= i; //나눈 후 몫을 계속 갱신해준다.
         }
-        else
-            Result[i+1]+=temp;
     }
-        
 
-    if(Result[0]==0)
-        for(i=1;i<=max(strlen(A),strlen(B));i++)
-            printf("%d",Result[i]);
-    else
-        for(i=0;i<=max(strlen(A),strlen(B));i++)
-            printf("%d",Result[i]);
-    
-    
-
-
+    if (n != 1)
+        printf("%d\n", n);
 
     return 0;
 }
-
