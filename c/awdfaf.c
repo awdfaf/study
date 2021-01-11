@@ -4,28 +4,50 @@
 #include<string.h>
 #include<math.h>
 #define max(a,b) ((a)>(b)?(a):(b))
+#define minFinder(a,b) a<b?a:b
+
+
 
 int main()
 {
-    int n,x[51],y[51],count[51]={0};
+    char board[50][50];
+    int N,M,min=80,cnB=0,cnW=0;
 
-    scanf("%d",&n);
+    scanf("%d %d",&N,&M);
 
-    for(int i=0;i<n;i++)
-    {
-        scanf("%d %d",&x[i],&y[i]);
-    }
-    for(int i=0;i<n;i++)
-    {
-        for(int j=0;j<n;j++)
+    for(int i=0;i<N;i++)
+        scanf("%s",&board[i]);
+    for(int i=0;i<N-7;i++)
+        for(int j=0;j<M-7;j++)
         {
-            if(i==j)
-                continue;
-            if(x[i]<x[j] && y[i]<y[j])
-                count[i]++;
+            cnB=0;
+            cnW=0;
+            for(int a=i;a<i+8;a++)
+                for(int b=j;b<j+8;b++)
+                {
+                    if((a+b)%2==0)
+                    {
+                        if(board[a][b]=='B')
+                            cnW++;
+                        else
+                            cnB++;
+                    }
+                    else
+                    {
+                        if(board[a][b]=='B')
+                            cnB++;
+                        else
+                            cnW++;
+                    }    
+                    
+                }
+        
+            min=minFinder(min,cnB);
+            min=minFinder(min,cnW);
         }
-        printf("%d ",count[i]+1);
-    }
+    printf("%d",min);
+
+
     
 
     return 0;

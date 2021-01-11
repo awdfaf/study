@@ -1,13 +1,21 @@
-n=int(input())
-arr=[]
-answer=[1 for i in range(n)]
-for i in range(n):
-    tmp=list(map(int,input().split()))
-    arr.append(tmp)
-for i in range(n):
-    for j in range(n):
-        if i !=j:
-            if arr[i][0]>arr[j][0] and arr[i][1]>arr[j][1]:
-                answer[j]+=1
-for i in range(n):
-    print(answer[i],end =" ")
+n,m=map(int,input().split())
+I=[]
+mini=[]
+
+for _ in range(n):
+    I.append(input())
+for a in range(n-7):
+    for i in range(m-7):
+        idx1=0
+        idx2=0
+        for b in range(a,a+8):
+            for j in range(i,i+8):
+                if(j+b)%2==0:
+                    if I[b][j] != 'W': idx1+=1
+                    if I[b][j] != 'B': idx2+=1
+                else:
+                    if I[b][j] != 'B': idx1+=1
+                    if I[b][j] != 'W': idx2+=1
+        mini.append(idx1)
+        mini.append(idx2)
+print(min(mini))
