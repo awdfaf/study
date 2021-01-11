@@ -7,20 +7,26 @@
 
 int main()
 {
-    int n;
-    scanf("%d\n", &n);
+    int n,x[51],y[51],count[51]={0};
 
-    for (int i = 2; i <= sqrt(n); i++)
+    scanf("%d",&n);
+
+    for(int i=0;i<n;i++)
     {
-        while (n % i == 0)
-        { //나누어떨어지는 동안 계속 출력
-            printf("%d\n", i);
-            n /= i; //나눈 후 몫을 계속 갱신해준다.
-        }
+        scanf("%d %d",&x[i],&y[i]);
     }
-
-    if (n != 1)
-        printf("%d\n", n);
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            if(i==j)
+                continue;
+            if(x[i]<x[j] && y[i]<y[j])
+                count[i]++;
+        }
+        printf("%d ",count[i]+1);
+    }
+    
 
     return 0;
 }
