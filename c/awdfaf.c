@@ -10,45 +10,24 @@
 
 int main()
 {
-    char board[50][50];
-    int N,M,min=80,cnB=0,cnW=0;
+    int n,tmp;
 
-    scanf("%d %d",&N,&M);
-
-    for(int i=0;i<N;i++)
-        scanf("%s",&board[i]);
-    for(int i=0;i<N-7;i++)
-        for(int j=0;j<M-7;j++)
+    scanf("%d",&n);
+    int num=665,cnt=0;
+    while(cnt!=n)
+    {
+        tmp=++num;
+        while(tmp)
         {
-            cnB=0;
-            cnW=0;
-            for(int a=i;a<i+8;a++)
-                for(int b=j;b<j+8;b++)
-                {
-                    if((a+b)%2==0)
-                    {
-                        if(board[a][b]=='B')
-                            cnW++;
-                        else
-                            cnB++;
-                    }
-                    else
-                    {
-                        if(board[a][b]=='B')
-                            cnB++;
-                        else
-                            cnW++;
-                    }    
-                    
-                }
-        
-            min=minFinder(min,cnB);
-            min=minFinder(min,cnW);
+            if(tmp%1000==666)
+            {
+                cnt++;
+                break;
+            }
+            tmp/=10;
         }
-    printf("%d",min);
-
-
-    
+    }
+    printf("%d",num);
 
     return 0;
 }
