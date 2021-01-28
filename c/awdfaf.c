@@ -1,3 +1,4 @@
+#pragma warning(disable:4996)
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<stdlib.h>
@@ -7,29 +8,29 @@
 #define minFinder(a,b) a<b?a:b
 #define SWAP(x,y,t) (t=x,x=y,y=t)
 
-int num[1000000]={0};
 
-int compare(const void *a,const void *b)
-{
-    if(*(int *)a>*(int *)b)
-        return 1;
-    else if(*(int *)a<*(int *)b)
-        return -1;
-    else
-        return 0;
-}
+
 int main()
 {
-    int N;
+    int n,a[10001]={0},tmp;
 
-    scanf("%d",&N);
-    for(int i=0;i<N;i++)
-        scanf("%d",&num[i]);
-    
-    qsort(num,N,sizeof(int),compare);
+    scanf("%d",&n);
 
-    for(int i=0;i<N;i++)
-        printf("%d\n",num[i]);
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&tmp);
+        a[tmp]++;
+    }
+    for(int i=0;i<10001;i++)
+    {
+        if(a[i]!=0)
+        {
+            for(int j=0;j<a[i];j++)
+                printf("%d\n",i);
+        }
+    }
+
+
 
     return 0;
 }
