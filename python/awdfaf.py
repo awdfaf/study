@@ -1,13 +1,23 @@
-import sys
+def mean(v):
+    return round(sum(v)/n)
+
+def median(v):
+    if n==1 : return (v[0])
+    else : return (v[(n-1)//2])
+
+from collections import Counter
+def many_value(v):
+    if n==1 : return v[0]
+    c=Counter(v).most_common(2)
+    return (c[1][0] if c[0][1]==c[1][1] else [0][0])
+
+def min_max(v):
+    return v[n-1]-v[0]
+
 n=int(input())
-check_ls = [0]*10001
+v=sorted([int(input()) for _ in range(n)])
 
-for _ in range(n):
-    num=int(sys.stdin.readline())
-    check_ls[num]=check_ls[num]+1
-
-for i in range(10001):
-    if check_ls[i] != 0:
-        for _ in range(check_ls[i]):
-            print(i)
-                
+print(mean(v))
+print(median(v))
+print(many_value(v))
+print(min_max(v))
