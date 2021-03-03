@@ -5,35 +5,36 @@
 #include<math.h>
 #define max(a,b) ((a)>(b)?(a):(b))
 #define minFinder(a,b) a<b?a:b
-#define SWAP(x,y,t) (t=x,x=y,y=t)
-
+#define SWAP(x,y,t) (t=x,x=y,y=t) //정렬 매크로 함수
+#define MAX 100000
 
 int compare(const void *a,const void *b)
 {
-    if(*(int *)a>*(int *)b)
-        return -1;
-    else if(*(int *)a<*(int *)b)
+    const int *i = (const int *)a;
+    const int *j = (const int *)b;
+    if(i[0]>j[0])
         return 1;
-    else
-        return 0;
+    else if(i[0]==j[0])
+        return i[1]>j[1];
+    return 0;
 }
+
 int main()
 {
-    int N,i=0;
-    int num[100];
-    scanf("%d",&N);
-    while(N>0)
+    int d[MAX][2];
+
+    int t;
+    scanf("%d",&t);
+
+    for(int i=0;i<t;i++)
     {
-        num[i]=N%10;
-        N/=10;
-        i++;
-
+        scanf("%d %d",&d[i][0],&d[i][1]);
     }
-    
-    qsort(num,i,sizeof(int),compare);
+    qsort(d,t,sizeof(int)*2,compare);
 
-    for(int j=0;j<i;j++)
-        printf("%d",num[j]);
-
+    for(int i=0;i<t;i++)
+    {
+        printf("%d %d\n",d[i][0],d[i][1]);
+    }
     return 0;
 }
