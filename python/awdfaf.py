@@ -1,8 +1,9 @@
-import sys
-n=int(sys.stdin.readline())
-arr=[]
+n=int(input())
+dot_list=[]
+
 for _ in range(n):
-    arr.append(list(map(int,sys.stdin.readline().split())))
-arr=sorted(arr,key=lambda x:[x[0],x[1]])
-for a in arr:
-    print(a[0],a[1])
+    dot_list.append(list(map(int,input().split())))
+
+dot_list.sort(key=lambda dot: (dot[1],dot[0]))
+for [i,j] in dot_list:
+    print(i,j)
