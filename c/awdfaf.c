@@ -8,38 +8,46 @@
 #define SWAP(x,y,t) (t=x,x=y,y=t) //정렬 매크로 함수
 #define MAX 100001
 
-typedef struct IDX
-{
-    char mun[51];
-}idx;
-
-idx m[20000];
-
-int func(const void* a,const void* b)
-{
-    idx A=*(idx*)a;
-    idx B=*(idx*)b;
-    int lenA=strlen(A.mun);
-    int lenB=strlen(B.mun);
-    if(lenA != lenB)
-        return (lenA-lenB);
-    return strcmp(A.mun,B.mun);
-}
-int main()
+typedef struct info
 {
     int n;
-    scanf("%d",&n);
-    for(int i=0;i<n;i++)
-        scanf("%s",m[i].mun);
-    qsort(m,n,sizeof(idx),func);
-    for(int i=0;i<n;i++)
+    int age;
+    char name[101];
+}info;
+
+info infoo[100001];
+int compare(const void* a,const void* b);
+
+int main()
+{
+    int i,N,count=1;
+    scanf("%d",&N);
+    for(i=0;i<N;i++)
     {
-        if(i != 0)
-        {
-            if(strcmp(m[i-1].mun,m[i].mun)==0)
-                continue;
-        }
-        printf("%s\n",m[i].mun);
+        scanf("%d %s",&infoo[i].age,infoo[i].name);
+        infoo[i].n=count++;
     }
-    return 0;
+    qsort(infoo,N,sizeof(info),compare);
+    for(i=0;i<N;i++)
+    {
+        printf("%d %s\n",infoo[i].age,infoo[i].name);
+    }
+}
+int compare(const void* a,const void* b)
+{
+    info* ptrA=(info*)a;
+    info* ptrB=(info*)b;
+
+    if(ptrA->age < ptrB->age)
+        return -1;
+    else if(ptrA->age > ptrB->age)
+        return 1;
+    else
+    {
+        if(ptrA->n < ptrB->n)
+            return -1;
+        else if(ptrA->n > ptrB->n)
+            return 1;
+        return 0;
+    }
 }

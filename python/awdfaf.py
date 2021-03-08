@@ -1,8 +1,12 @@
-words = [input() for i in range(int(input()))]
-words = sorted(words,key=lambda x: (len(x),x))
+n = int(input())
 
-temp = ''
-for i in words:
-    if temp != i:
-        print(i)
-        temp=i
+ls = []
+for _ in range(n):
+    age,name = map(str,input().split())
+    age = int(age)
+    ls.append((age,name))
+
+ls.sort(key=lambda parameter_list: parameter_list[0])
+
+for i in ls:
+    print(i[0],i[1])
