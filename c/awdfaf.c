@@ -6,35 +6,40 @@
 #define max(a,b) ((a)>(b)?(a):(b))
 #define minFinder(a,b) a<b?a:b
 #define SWAP(x,y,t) (t=x,x=y,y=t) //정렬 매크로 함수
-#define MAX 100000
+#define MAX 100001
 
-int compare(const void *a,const void *b)
+typedef struct IDX
 {
-    const int *i = (const int *)a;
-    const int *j = (const int *)b;
-    if(i[0]>j[0])
-        return 1;
-    else if(i[0]==j[0])
-        return i[1]>j[1];
-    return 0;
-}
+    char mun[51];
+}idx;
 
+idx m[20000];
+
+int func(const void* a,const void* b)
+{
+    idx A=*(idx*)a;
+    idx B=*(idx*)b;
+    int lenA=strlen(A.mun);
+    int lenB=strlen(B.mun);
+    if(lenA != lenB)
+        return (lenA-lenB);
+    return strcmp(A.mun,B.mun);
+}
 int main()
 {
-    int d[MAX][2];
-
-    int t;
-    scanf("%d",&t);
-
-    for(int i=0;i<t;i++)
+    int n;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+        scanf("%s",m[i].mun);
+    qsort(m,n,sizeof(idx),func);
+    for(int i=0;i<n;i++)
     {
-        scanf("%d %d",&d[i][0],&d[i][1]);
-    }
-    qsort(d,t,sizeof(int)*2,compare);
-
-    for(int i=0;i<t;i++)
-    {
-        printf("%d %d\n",d[i][0],d[i][1]);
+        if(i != 0)
+        {
+            if(strcmp(m[i-1].mun,m[i].mun)==0)
+                continue;
+        }
+        printf("%s\n",m[i].mun);
     }
     return 0;
 }

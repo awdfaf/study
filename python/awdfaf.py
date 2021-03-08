@@ -1,9 +1,8 @@
-n=int(input())
-dot_list=[]
+words = [input() for i in range(int(input()))]
+words = sorted(words,key=lambda x: (len(x),x))
 
-for _ in range(n):
-    dot_list.append(list(map(int,input().split())))
-
-dot_list.sort(key=lambda dot: (dot[1],dot[0]))
-for [i,j] in dot_list:
-    print(i,j)
+temp = ''
+for i in words:
+    if temp != i:
+        print(i)
+        temp=i
