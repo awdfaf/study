@@ -1,12 +1,23 @@
-n = int(input())
+n,m=map(int,input().split())
 
-ls = []
-for _ in range(n):
-    age,name = map(str,input().split())
-    age = int(age)
-    ls.append((age,name))
+list=[1 + i for i in range(n)]
 
-ls.sort(key=lambda parameter_list: parameter_list[0])
 
-for i in ls:
-    print(i[0],i[1])
+
+check=[False]*n
+array=[]
+
+def dfs(x):
+    if x==m:
+        print(*array)
+        return
+    for i in range(n):
+        if check[i]:
+            continue
+        array.append(list[i])
+        check[i]=True
+        dfs(x+1)
+        array.pop()
+        check[i]=False
+dfs(0)
+# 백 트래킹 dfs

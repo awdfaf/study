@@ -8,46 +8,33 @@
 #define SWAP(x,y,t) (t=x,x=y,y=t) //정렬 매크로 함수
 #define MAX 100001
 
-typedef struct info
+int arr[8],visit_arr[8]={0};
+int N,M;
+void func(int n)
 {
-    int n;
-    int age;
-    char name[101];
-}info;
-
-info infoo[100001];
-int compare(const void* a,const void* b);
-
-int main()
-{
-    int i,N,count=1;
-    scanf("%d",&N);
-    for(i=0;i<N;i++)
-    {
-        scanf("%d %s",&infoo[i].age,infoo[i].name);
-        infoo[i].n=count++;
+    if(n==M+1)
+    {   for(int i=1;i<=M;i++)
+            printf("%d ",arr[i]);
+        printf("\n");
     }
-    qsort(infoo,N,sizeof(info),compare);
-    for(i=0;i<N;i++)
-    {
-        printf("%d %s\n",infoo[i].age,infoo[i].name);
-    }
-}
-int compare(const void* a,const void* b)
-{
-    info* ptrA=(info*)a;
-    info* ptrB=(info*)b;
-
-    if(ptrA->age < ptrB->age)
-        return -1;
-    else if(ptrA->age > ptrB->age)
-        return 1;
     else
     {
-        if(ptrA->n < ptrB->n)
-            return -1;
-        else if(ptrA->n > ptrB->n)
-            return 1;
-        return 0;
+        for(int i=1;i<=N;i++)
+        {
+            if(visit_arr[i]==0)
+            {
+                visit_arr[i]=1;
+                arr[n]=i;
+                func(n+1);
+                visit_arr[1]=0;
+            }
+        }
     }
 }
+int main()
+{
+    scanf("%d %d",&N,&M);
+    func(1);
+    return 0;
+}
+// 재귀함수
