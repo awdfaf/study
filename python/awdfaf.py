@@ -1,23 +1,16 @@
-n,m=map(int,input().split())
+N,M=map(int,input().split())
+check=[False]*(N+1)
+answer=['0']*M
 
-list=[1 + i for i in range(n)]
-
-
-
-check=[False]*n
-array=[]
-
-def dfs(x):
-    if x==m:
-        print(*array)
-        return
-    for i in range(n):
-        if check[i]:
-            continue
-        array.append(list[i])
-        check[i]=True
-        dfs(x+1)
-        array.pop()
-        check[i]=False
-dfs(0)
-# 백 트래킹 dfs
+def dfs(index,start,n=N,m=M):
+    if index ==m:
+        print(' '.join(answer))
+    else:
+        for i in range(start,n+1):
+            if check[i]:
+                continue
+            check[i]=True
+            answer[index]=str(i)
+            dfs(index+1,i+1)
+            check[i]=False
+dfs(0,1)
