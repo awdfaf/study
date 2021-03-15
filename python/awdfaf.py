@@ -1,16 +1,9 @@
-N,M=map(int,input().split())
-check=[False]*(N+1)
-answer=['0']*M
+import itertools
 
-def dfs(index,start,n=N,m=M):
-    if index ==m:
-        print(' '.join(answer))
-    else:
-        for i in range(start,n+1):
-            if check[i]:
-                continue
-            check[i]=True
-            answer[index]=str(i)
-            dfs(index+1,i+1)
-            check[i]=False
-dfs(0,1)
+N,M=map(int,input().split())
+num_list=[i for i in range(1,N+1)]
+
+for num in itertools.product(num_list,repeat=M):
+    for i in num:
+        print(i,end=' ')
+    print(end='\n')
