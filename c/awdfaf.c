@@ -9,54 +9,40 @@
 //#define MAX 100001
 
 
-int num[11];
-int opt[4]; //연산자의 개수 쳌
-int arr[11];
-int max=-1000000000;
-int min=1000000000;
-int n;
-
-int operation(int n,int ans,int num)
-{
-	if(n==0)
-		ans+=num;
-	else if (n==1)
-		ans-=num;
-	else if(n==2)
-		ans*=num;
-	else
-		ans/=num;
-	return ans;
-	
-}
-void dfs(int ans,int cnt)
-{
-	if(cnt==n)
-	{
-		max=max>ans?max:ans;
-		min=min>ans?ans:min;
+int spec[20][20]={0},team[20]={0}; //배열 team에서는 인덱스에 해당하는 1로 뽑힌 사람을 표시한다.
+int num=0,start=0,link=0,power=0,min=2000;
+void members(int idx, int cnt) {
+	if (cnt == num / 2) { //팀을 반으로 나눴으면
+		start = 0; link = 0;
+		for (int i = 0; i < num; i++) {
+			for (int j = i + 1; j < num; j++) {
+				if(team[i]==1 && team[j]==1) start += spec[i][j] + spec[j][i]; //뽑힌 사람들로 능력치 더하기
+				if (team[i] != 1 && team[j] != 1) link += spec[i][j] + spec[j][i]; //뽑히지 않은 사람들로 능력치 더하기
+			}
+		}
+		power = abs(start - link); //절댓값을 구하는 abs() 함수
+		if (power < min) min = power;
 		return;
 	}
-	for(int i=0;i<4;i++)
-	{
-		if(opt[i]>0)
-		{
-			opt[i]--;
-			dfs(operation(i,ans,num[cnt]),cnt+1);
-			opt[i]++;
+	for (int i = idx; i < num; i++) {
+		if (team[i] != 1) {
+			team[i] = 1; //차례대로 뽑힌 사람 선정
+			members(i, cnt + 1);
+			team[i] = 0;
 		}
 	}
 }
 int main()
 {
-	scanf("%d",&n);
-	for(int i=0;i<n;i++)
+	scanf("%d",&num);
+	for(int i=0;i<num;i++)
 	{
-		scanf("%d",&num[i]);
+		for(int j=0;j<num;j++)
+		{
+			scanf("%d",&spec[i][j]);
+		}
 	}
-	for(int i=0;i<4;i++)
-		scanf("%d",&opt[i]);
-	
-	dfs(num[0],1);
-	printf("%d\n%d",max,min);
+	members(0,0);
+	printf("%d",min);
+	return 0;
 }
