@@ -1,17 +1,12 @@
-from itertools import combinations
-
-def solution(arr):
-    stat=0
-    for i in arr:
-        for j in arr:
-            stat+=list_[i][j]
-    return stat
-n=int(input())
-team=[]
-cha_list=[]
-list_=[list(map(int,input().split())) for _ in range(n)]
-for i in combinations(range(n),n//2):                       
-    team.append(i)                                      
-for i in range(len(team)):
-    cha_list.append(abs(solution(team[i])-solution(team[-i-1])))   
-print(min(cha_list))
+fibo = [[0 for k in range(2)] for k in range(42)]
+fibo[0][0] = 1
+fibo[0][1] = 0
+fibo[1][0] = 0
+fibo[1][1] = 1
+for k in range(2,42):
+    fibo[k][0] = fibo[k - 1][0] + fibo[k - 2][0];
+    fibo[k][1] = fibo[k - 1][1] + fibo[k - 2][1];
+a = int(input())
+for k in range(a):
+    c = int(input())
+    print("%d"% fibo[c][0] +" %d" % fibo[c][1])

@@ -9,40 +9,24 @@
 //#define MAX 100001
 
 
-int spec[20][20]={0},team[20]={0}; //배열 team에서는 인덱스에 해당하는 1로 뽑힌 사람을 표시한다.
-int num=0,start=0,link=0,power=0,min=2000;
-void members(int idx, int cnt) {
-	if (cnt == num / 2) { //팀을 반으로 나눴으면
-		start = 0; link = 0;
-		for (int i = 0; i < num; i++) {
-			for (int j = i + 1; j < num; j++) {
-				if(team[i]==1 && team[j]==1) start += spec[i][j] + spec[j][i]; //뽑힌 사람들로 능력치 더하기
-				if (team[i] != 1 && team[j] != 1) link += spec[i][j] + spec[j][i]; //뽑히지 않은 사람들로 능력치 더하기
-			}
-		}
-		power = abs(start - link); //절댓값을 구하는 abs() 함수
-		if (power < min) min = power;
-		return;
-	}
-	for (int i = idx; i < num; i++) {
-		if (team[i] != 1) {
-			team[i] = 1; //차례대로 뽑힌 사람 선정
-			members(i, cnt + 1);
-			team[i] = 0;
-		}
-	}
-}
 int main()
 {
-	scanf("%d",&num);
-	for(int i=0;i<num;i++)
+	int fibo[42][2];
+	fibo[0][0] = 1;
+	fibo[0][1] = 0;
+	fibo[1][0] = 0;
+	fibo[1][1] = 1;
+
+	for(int k=2;k<42;k++)
 	{
-		for(int j=0;j<num;j++)
-		{
-			scanf("%d",&spec[i][j]);
-		}
+		fibo[k][0] = fibo[k - 1][0] + fibo[k - 2][0];
+		fibo[k][1] = fibo[k - 1][1] + fibo[k - 2][1];
 	}
-	members(0,0);
-	printf("%d",min);
-	return 0;
+	int a,c;
+	scanf("%d", &a);
+	for (int k = 0; k < a; k++)
+	{
+		scanf("%d", &c);
+		printf("%d %d\n", fibo[c][0], fibo[c][1]);
+	}
 }
