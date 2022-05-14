@@ -26,7 +26,7 @@ def add_file():
 
 #선택삭제
 def del_file():
-    print(list_file.curselection())
+    # print(list_file.curselection())
 
     for index in reversed(list_file.curselection()):
         list_file.delete(index)
@@ -55,7 +55,7 @@ def start():
     if len(txt_dest_path.get()) == 0:
         msgbox.showwarning("경고","저장경로를 선택하세요")
         return
-        
+
 
 
 #파일 프레임(파일 추가, 선택 삭제)

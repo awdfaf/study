@@ -2,7 +2,7 @@ from textwrap import fill
 import tkinter.ttk as ttk
 from tkinter import *
 
-from click import progressbar
+
 
 
 root = Tk()

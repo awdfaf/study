@@ -1,11 +1,6 @@
-from multiprocessing import reduction
-from textwrap import fill
 import tkinter.ttk as ttk
 from tkinter import *
 from tkinter import filedialog
-from traceback import print_tb
-from unittest import result
-from click import progressbar
 import tkinter.messagebox as msgbox
 from PIL import Image
 import os
