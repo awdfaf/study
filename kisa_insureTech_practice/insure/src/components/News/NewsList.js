@@ -4,8 +4,15 @@ const NewsList = ({ newsList }) => {
   return (
     <div>
       {newsList.map((data, index) => {
-        return <p key={index}>{data.title}</p>;
+        return(
+          <div>
+            <p key={index}>{data.title}</p>
+            <p key={index}>{data.url}</p>
+          </div>
+        )
       })}
+      
+      
     </div>
   );
 };
